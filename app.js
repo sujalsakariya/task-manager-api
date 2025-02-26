@@ -8,11 +8,13 @@ const mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./modules/user/route');
 
-mongoose.connect('mongodb://127.0.0.1:27017/task-manager')
-  .then(() => console.log('Connected!'))
-  .catch(err => {
-    console.log(err.message)
-  })
+mongoose.connect('mongodb://127.0.0.1:27017/task-manager', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // 30 seconds timeout
+})
+  .then(() => console.log('Connected to MongoDB!'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 
 var app = express();
